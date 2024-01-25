@@ -14,7 +14,7 @@
     <tr>
         <td><img src="{{ asset('img/'.$item->img_path) }}" alt="{{$item->name."の画像"}}"></td>
         <td>{{$item->name}}</td>
-        <td>カテゴリー</td>
+        <td>{{$item->category->name}}</td>
         <td>{{$item->price."円"}}</td>
         <td>税込み価格</td>
         <td>{{$item->description}}</td>

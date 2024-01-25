@@ -21,7 +21,9 @@ class UserController extends Controller{
 
     public function detail($id){
         //IDでしていして取得
-        $item=product::find($id);
+        $item=Product::with('category')
+            ->where('public_flag', 0)
+            ->find($id);
         
         //税率の加算
         // $taxInclusivePrice =TaxInclusivePrice($item->price);
