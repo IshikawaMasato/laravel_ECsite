@@ -12,10 +12,11 @@ class UserController extends Controller{
         $items=product::all();
 
         //税率の加算
-        $taxInclusivePrice =TaxInclusivePrice($items->price);
+        // $taxInclusivePrice =TaxInclusivePrice($items->price);
         
         //一覧画面へ
-        return view('user.index',['items'=>$items,'taxInclusivePrice'=>$taxInclusivePrice]);
+        return view('user.index',['items'=>$items]);
+        // return view('user.index',['items'=>$items,'taxInclusivePrice'=>$taxInclusivePrice]);
     }
 
     public function detail($id){
@@ -23,10 +24,16 @@ class UserController extends Controller{
         $item=product::find($id);
         
         //税率の加算
-        $taxInclusivePrice =TaxInclusivePrice($item->price);
+        // $taxInclusivePrice =TaxInclusivePrice($item->price);
         
         //詳細画面へ
-        return view('user.detail',['item'=>$item, 'taxInclusivePrice' => $taxInclusivePrice]);
+        if ( $item->public_flag == 0 ){
+            return view('user.detail',['item'=>$item]);
+        }else{
+            //非公開だった時の処理
+            $msg = "このページは存在しません。";
+            return view('user.detail',['msg'=>$msg]);
+        }
     }
 
     //税率の加算関数

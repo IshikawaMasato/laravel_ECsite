@@ -1,5 +1,8 @@
 <h1>detail</h1>
 <table>
+    @isset($msg)
+    <p>{{$msg}}</p>
+    @else
     <tr>
         <th>画像</th>
         <th>名前</th>
@@ -16,4 +19,5 @@
         <td>税込み価格</td>
         <td>{{$item->description}}</td>
     </tr>
+    @endisset
 </table>
