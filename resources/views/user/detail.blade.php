@@ -12,12 +12,14 @@
         <th>説明</th>
     </tr>
     <tr>
-        <td><img src="{{ asset('img/'.$item->img_path) }}" alt="{{$item->name."の画像"}}"></td>
-        <td>{{$item->name}}</td>
-        <td>{{$item->category->name}}</td>
-        <td>{{$item->price."円"}}</td>
-        <td>税込み価格</td>
-        <td>{{$item->description}}</td>
+        <td>
+                <img src="{{ asset('img/'.$item->img_path) }}" alt="{{ $item->name.'の画像' }}">
+            </td>
+            <td>{{ $item->name }}</td>
+            <td>{{ $item->category->name }}</td>
+            <td>{{ $item->price."円" }}</td>
+            <td>{{ $item->taxInclusivePrice()."円" }}</td>
+            <td>{{ $item->description }}</td>
     </tr>
     @endisset
 </table>

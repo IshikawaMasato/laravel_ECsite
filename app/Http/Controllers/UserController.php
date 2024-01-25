@@ -9,26 +9,20 @@ class UserController extends Controller{
 
     public function index(){
         //全件取得
-        $items=product::where('public_flag',0)->get();
+        $items=product::where('public_flag',0)->get();//公開中のデータのみ
 
-        //税率の加算
-        // $taxInclusivePrice =TaxInclusivePrice($items->price);
-        
         //一覧画面へ
         return view('user.index',['items'=>$items]);
-        // return view('user.index',['items'=>$items,'taxInclusivePrice'=>$taxInclusivePrice]);
     }
 
     public function detail($id){
         //IDでしていして取得
         $item=Product::with('category')
-            ->where('public_flag', 0)
-            ->find($id);
-        
-        //税率の加算
-        // $taxInclusivePrice =TaxInclusivePrice($item->price);
-        
+            ->where('public_flag', 0)//公開中のデータのみ
+            ->find($id);//IDで1件取得
+
         //詳細画面へ
+        //公開中（public_flag==0）の時は表示する
         if ( $item->public_flag == 0 ){
             return view('user.detail',['item'=>$item]);
         }else{
@@ -36,10 +30,5 @@ class UserController extends Controller{
             $msg = "このページは存在しません。";
             return view('user.detail',['msg'=>$msg]);
         }
-    }
-
-    //税率の加算関数
-    function TaxInclusivePrice($price){
-        return $price*1.1;
     }
 }
