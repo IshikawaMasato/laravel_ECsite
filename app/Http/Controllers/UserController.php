@@ -9,7 +9,7 @@ class UserController extends Controller{
 
     public function index(){
         //全件取得
-        $items=product::all();
+        $items=product::where('public_flag',0)->get();
 
         //税率の加算
         // $taxInclusivePrice =TaxInclusivePrice($items->price);
