@@ -26,7 +26,7 @@ class UserController extends Controller{
             return view('user.detail',['item'=>$item]);
         }else{
             //非公開だった時の処理
-            $msg = "このページは存在しません。";
+            $msg = "申し訳ございません。この商品は現在非公開となっております。";
             return view('user.detail',['msg'=>$msg]);
         }
     }
