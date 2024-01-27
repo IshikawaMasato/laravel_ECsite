@@ -18,7 +18,6 @@ class UserController extends Controller{
     public function detail($id){
         //IDでしていして取得
         $item=Product::with('category')
-            ->where('public_flag', 0)//公開中のデータのみ
             ->find($id);//IDで1件取得
 
         //詳細画面へ
