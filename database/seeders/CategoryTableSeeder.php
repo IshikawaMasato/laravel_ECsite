@@ -14,6 +14,16 @@ class CategoryTableSeeder extends Seeder
     public function run(): void
     {
         $categories = [
+            ['name' => '家電'],
+            ['name' => 'ファッション'],
+            ['name' => '書籍'],
+            ['name' => '食品'],
+            ['name' => 'スポーツ用品'],
+            ['name' => '美容・健康'],
+            ['name' => 'ホビー'],
+            ['name' => '車・バイク'],
+            ['name' => '家具・インテリア'],
+            ['name' => 'ペット用品'],
             ['name' => '音楽楽器'],
             ['name' => 'アウトドア用品'],
             ['name' => 'ゲーム・おもちゃ'],
