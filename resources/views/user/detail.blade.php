@@ -1,3 +1,5 @@
+@extends('layouts.baselayout')
+@section('content')
 <h1>detail</h1>
 @isset($msg)
     <p>{{$msg}}</p>
@@ -23,3 +25,4 @@
         </tr>
     </table>
 @endisset
+@endsection

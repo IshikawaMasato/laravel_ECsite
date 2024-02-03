@@ -26,3 +26,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/index', [UserController::class, 'index']);
 Route::get('/show/{id}', [UserController::class, 'detail'])->name('user.detail');
+Route::get('/search', [UserController::class, 'search']);
