@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\product; 
 use App\Models\category; 
@@ -9,11 +9,16 @@ use App\Models\category;
 class UserController extends Controller{
 
     public function index(){
+        $user = Auth::user();
         //全件取得
-        $items=product::where('public_flag',0)->get();//公開中のデータのみ
-        $categorys= category::where('delete_flag',0)->get();
+        $items=product::where('public_flag',0)
+            ->where('delete_flag',0)
+            ->get();//公開中のデータのみ
+        $categorys= category::where('delete_flag',0)
+            ->where('delete_flag',0)
+            ->get();//公開中のカテゴリの取得
         //一覧画面へ
-        return view('user.index',['items'=>$items,'categorys'=>$categorys]);
+        return view('user.index',['items'=>$items,'categorys'=>$categorys,'user'=>$user]);
     }
 
     public function detail($id){
@@ -21,10 +26,14 @@ class UserController extends Controller{
         $item=Product::with('category')
             ->find($id);//IDで1件取得
 
+        $categorys= category::where('delete_flag',0)
+            ->where('delete_flag',0)
+            ->get();//公開中のカテゴリの取得
+
         //詳細画面へ
         //公開中（public_flag==0）の時は表示する
-        if ( $item->public_flag == 0 ){
-            return view('user.detail',['item'=>$item]);
+        if ( $item->public_flag == 0 &&$item->delete_flag==0){
+            return view('user.detail',['item'=>$item,'categorys'=>$categorys]);
         }else{
             //非公開だった時の処理
             $msg = "申し訳ございません。この商品は現在非公開となっております。";
@@ -33,9 +42,12 @@ class UserController extends Controller{
     }
 
     public function search(Request $request){
-        $categorys= category::where('delete_flag',0)->get();
+        $categorys= category::where('delete_flag',0)
+            ->where('delete_flag',0)
+            ->get();
 
-        $query=product::where('public_flag',0);//公開中のデータのみ
+        $query=product::where('public_flag',0)
+            ->where('delete_flag',0);//公開中のデータのみ
         if($request->keyword){
             //keywordが入力されていたら検索
             $query->where('name','LIKE',"%{$request->keyword}%");

@@ -13,7 +13,7 @@
         @foreach($items as $item)
             <tr>
                 <td>
-                    <img src="{{ asset('img/'.$item->img_path) }}" alt="{{ $item->name.'の画像' }}">
+                    <img src="{{ asset('storage/avatar/'.$item->img_path) }}" alt="{{ $item->name.'の画像' }}">
                 </td>
                 <td>{{ $item->name }}</td>
                 <td>{{ $item->price."円" }}</td>

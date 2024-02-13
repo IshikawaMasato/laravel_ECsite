@@ -19,4 +19,25 @@ class product extends Model
     {
         return round($this->price * 1.1);
     }
+    //public_flagの表示の変更
+    public function public_flag()
+    {
+        if($this->public_flag==0)
+        {
+            return '公開中'; 
+        }else{
+            return '非公開' ;
+        }
+    }
+
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
+    public static $rules = [
+        'name' => 'required|string|max:255',
+        'description' => 'required|string|max:255',
+        'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'price' => 'required|integer|min:0',
+        'category_id' => 'required|exists:categories,id',
+        'public_flag' => 'required|boolean',
+    ];
 }

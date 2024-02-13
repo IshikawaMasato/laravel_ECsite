@@ -18,7 +18,8 @@
             <input type="text" name="keyword">
             <input type="submit" value="検索">
         </form>
-        <a href="">アカウント</a>
+        <a href="/login">ログイン</a>
+        <a href="/register">登録</a>
         <a href="">注文履歴</a>
         <a href="">カート</a>
     </header>
